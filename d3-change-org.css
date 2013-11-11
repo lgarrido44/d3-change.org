@@ -1,10 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
+/* Main css style */
 body {
     font-family: 'Open Sans', sans-serif;
     width: 100%;
-    padding: 0;
-    margin: 0;
+    margin: auto;
+    text-align: center;
 }
 
 canvas {
@@ -17,12 +18,85 @@ canvas {
     pointer-events: all;
 }
 
-.border {
-    stroke: grey;
-    stroke-width: 2px;
-    fill: none;
+/* About boxes */
+#about {
+    position: absolute;
+    color: #777777;
+    cursor: default;
+    top: 10px;
+    right: 20px;
+    text-align: left;
+    font-size: 13px;
 }
 
+#about.en {
+    top: 10px;
+    right: 100px;
+}
+
+#about .button {
+    padding: 3px;
+    position: absolute;
+    right: 20px;
+    width: 100px;
+    text-align: right;
+    cursor: pointer;
+}
+
+#about div {
+    overflow: hidden;
+    height: 0;
+    width: 0;
+}
+
+#about .help {
+    color: black;
+    font-style: italic;
+}
+
+#about .contact {
+    font-size: 75%;
+    text-align:right;
+}
+
+#about a {
+    color:#3399cc;
+    font-weight:400;
+    text-decoration:none;
+}
+
+#about a:hover {
+    color:#006699;
+}
+
+#about:hover div {
+    width: 400px;
+    height: auto;
+    padding: 1em 1em;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+}
+
+/* Default fill color for departements */
 .departement {
-  fill: #ff0000;/*none;*/
+    fill: #ff0000;/*none;*/
+}
+
+/* Caption & legend styles */
+.caption {
+    font-size: 10px;
+}
+
+.key {
+    font-size: 10px;
+}
+
+.key path {
+    display: none;
+}
+
+.key line {
+    stroke: #000000;
+    shape-rendering: crispEdges;
 }
