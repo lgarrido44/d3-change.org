@@ -1,0 +1,31 @@
+#+TITLE:  d3-change.org README
+#+AUTHOR: Xavier Garrido
+#+EMAIL:  xavier.garrido@gmail.com
+
+This repository holds a basic use case for [[https://github.com/mbostock/d3][Data-Driven Documents]] aka d3 which is
+a Javascript library for manipulating documents based on data. The use case is a
+visual representation of where signatures of petition [[http://chn.ge/16Hap7R]["Nous ne sommes pas des
+sangliers"]] come from. See the result @ http://xgarrido.github.io/d3-change.org.
+
+Several files are used to get such representation:
+
+- [[file:index.html][index.html]] file holds the =html= code and the links to d3.js libraries,
+- [[file:d3-change.org.js][d3-change.org.js]] file is the Javascript code implementation,
+- [[file:d3-change.org.css][d3-change.org.css]] is the cascading style sheets use to custom =html= and d3
+  components,
+- [[file:./data/rate.tsv][rate.tsv]] contains the data in tab-separated values. This is the result of
+  processing emails from [[http://www.change.org/fr][change.org]] data base,
+- [[file:./json/departement.json][departement.json]] is the [[http://fr.wikipedia.org/wiki/JavaScript_Object_Notation][JavaScript Object Notation]] which describe geometry of
+  France departments. See https://github.com/kerneis/france-choropleth for more
+  details.
+
+To keep track of resources, here are the different links to achieve such map :
+
+- http://bost.ocks.org/mike/map : basic tutorial for generating topojson file
+  and for rendering it with d3.js.
+- http://bl.ocks.org/mbostock/6264239 : a basic example of json representation.
+- https://gist.github.com/mbostock/3305937 : a gist maybe useful for
+  manipulating tsv data.
+- http://bl.ocks.org/biovisualize/1016860 and
+  http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html : to get
+  tooltip over map
