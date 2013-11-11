@@ -1,5 +1,5 @@
 var height = window.innerHeight - 10;
-var width = height + 100;
+var width  = height + 100;
 
 var zoom = d3.behavior.zoom()
     .on("zoom", zoom);
@@ -21,9 +21,10 @@ var projection = d3.geo.albers()
 var path = d3.geo.path()
     .projection(projection);
 
-var quantize = d3.scale.quantize()
-    .domain([0, 25])
-    .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+var threshold = d3.scale.threshold()
+    .domain([2, 5, 10, 15, 20])
+    .range(["#f7fbff", "#c6dbef", "#6baed6", "#2171B5", "#08519C", "#08306B"]);
+    // .range(["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
 
 var rateDpt = d3.map();
 
@@ -38,8 +39,8 @@ function ready(error, departement) {
         .selectAll("path")
         .data(departement.features)
         .enter().append("path")
-        .attr("class", function(d) {
-            return quantize(rateDpt.get(d.properties.CODE_DEPT));
+        .style("fill", function(d) {
+            return threshold(rateDpt.get(d.properties.CODE_DEPT));
         })
         .attr("d", path);
 }
