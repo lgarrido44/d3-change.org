@@ -7,9 +7,9 @@ var zoom = d3.behavior.zoom()
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height)
-    .append("g")
-    .call(zoom)
     .append("g");
+    // .call(zoom)
+    // .append("g");
 
 var projection = d3.geo.albers()
     .center([1, 46.5])
@@ -21,10 +21,42 @@ var projection = d3.geo.albers()
 var path = d3.geo.path()
     .projection(projection);
 
-var threshold = d3.scale.threshold()
-    .domain([2, 5, 10, 15, 20])
-    .range(["#f7fbff", "#c6dbef", "#6baed6", "#2171B5", "#08519C", "#08306B"]);
-    // .range(["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
+var color = d3.scale.threshold()
+    .domain([0, 2, 5, 10, 15, 20, 25])
+    .range(["#ffffff", "#f7fbff", "#c6dbef", "#6baed6", "#2171B5", "#08519C", "#08306B"]);
+
+// A position encoding for the key only.
+var x = d3.scale.linear()
+    .domain([0, 25])
+    .range([0, 200]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .tickSize(13)
+    .tickValues(color.domain());
+
+var g = svg.append("g")
+    .attr("class", "key")
+    .attr("transform", "translate(40,40)");
+
+g.selectAll("rect").data(color.range().map(function(d, i) {
+    return {
+        x0: i ? x(color.domain()[i - 1]) : x.range()[0],
+        x1: i < color.domain().length ? x(color.domain()[i]) : x.range()[1],
+        z: d
+    };
+}))
+    .enter().append("rect")
+    .attr("height", 10)
+    .attr("x", function(d) { return d.x0; })
+    .attr("width", function(d) { return d.x1 - d.x0; })
+    .style("fill", function(d) { return d.z; });
+
+g.call(xAxis).append("text")
+    .attr("class", "caption")
+    .attr("y", -6)
+    .text("Nombre de signatures pour 10 000 habitants");
 
 var rateDpt = d3.map();
 
@@ -40,7 +72,7 @@ function ready(error, departement) {
         .data(departement.features)
         .enter().append("path")
         .style("fill", function(d) {
-            return threshold(rateDpt.get(d.properties.CODE_DEPT));
+            return color(rateDpt.get(d.properties.CODE_DEPT));
         })
         .attr("d", path);
 }
