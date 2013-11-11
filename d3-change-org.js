@@ -25,7 +25,7 @@ var color = d3.scale.threshold()
     .domain([0, 2, 5, 10, 15, 20, 25])
     .range(["#ffffff", "#f7fbff", "#c6dbef", "#6baed6", "#2171B5", "#08519C", "#08306B"]);
 
-// A position encoding for the key only.
+// Color scale legend
 var x = d3.scale.linear()
     .domain([0, 25])
     .range([0, 200]);
@@ -58,6 +58,13 @@ g.call(xAxis).append("text")
     .attr("y", -6)
     .text("Nombre de signatures pour 10 000 habitants");
 
+// Parsing data from tsv and json geo file
+var tooltip = d3.select("body")
+    .append("div").attr("class", "tooltip")
+    .style("z-index", "10")
+    .style("visibility", "hidden");
+    // .text("a simple tooltip");
+
 var rateDpt = d3.map();
 
 queue()
@@ -73,6 +80,20 @@ function ready(error, departement) {
         .enter().append("path")
         .style("fill", function(d) {
             return color(rateDpt.get(d.properties.CODE_DEPT));
+        })
+        .on("mouseover", function(d) {
+            var code_dpt = d.properties.CODE_DEPT;
+            var rate_dpt = rateDpt.get(d.properties.CODE_DEPT);
+            tooltip .html(d.properties.NOM_DEPT + "<br>" + rate_dpt + "&#8241");
+            return tooltip
+                .style("background", color(rate_dpt))
+                .style("visibility", "visible");
+        })
+	.on("mousemove", function() {
+            return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
+        })
+	.on("mouseout", function() {
+            return tooltip.style("visibility", "hidden");
         })
         .attr("d", path);
 }
