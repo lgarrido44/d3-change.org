@@ -7,7 +7,9 @@ a Javascript library for manipulating documents based on data. The use case is a
 visual representation of where signatures of petition [[http://chn.ge/16Hap7R]["Nous ne sommes pas des
 sangliers"]] come from. See the result @ http://xgarrido.github.io/d3-change.org.
 
-Several files are used to get such representation:
+* Files description
+
+Several files are used to get such results:
 
 - [[file:index.html][index.html]] file holds the =html= code and the links to d3.js libraries,
 - [[file:d3-change.org.js][d3-change.org.js]] file is the Javascript code implementation,
@@ -18,6 +20,8 @@ Several files are used to get such representation:
 - [[file:./json/departement.json][departement.json]] is the [[http://fr.wikipedia.org/wiki/JavaScript_Object_Notation][JavaScript Object Notation]] which describe geometry of
   France departments. See https://github.com/kerneis/france-choropleth for more
   details.
+
+* Link resources
 
 To keep track of resources, here are the different links to achieve such map :
 
