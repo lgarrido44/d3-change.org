@@ -63,7 +63,6 @@ var tooltip = d3.select("body")
     .append("div").attr("class", "tooltip")
     .style("z-index", "10")
     .style("visibility", "hidden");
-    // .text("a simple tooltip");
 
 var rateDpt = d3.map();
 
