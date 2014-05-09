@@ -22,12 +22,12 @@ var path = d3.geo.path()
     .projection(projection);
 
 var color = d3.scale.threshold()
-    .domain([0, 2, 5, 10, 15, 20, 25])
-    .range(["#ffffff", "#f7fbff", "#c6dbef", "#6baed6", "#2171B5", "#08519C", "#08306B"]);
+    .domain([0, 2, 5, 10, 15, 20, 25,30])
+    .range(["#ffffff", "#f7fbff", "#c6dbef", "#6baed6", "#2171B5", "#08519C", "#08306B","#FF0000"]);
 
 // Color scale legend
 var x = d3.scale.linear()
-    .domain([0, 25])
+    .domain([0, 30])
     .range([0, 200]);
 
 var xAxis = d3.svg.axis()
